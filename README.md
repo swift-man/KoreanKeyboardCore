@@ -1,5 +1,11 @@
 # KoreanKeyboardCore
 
+![Swift](https://img.shields.io/badge/Swift-6.0-F05138?style=flat-square&logo=swift&logoColor=white)
+![SPM](https://img.shields.io/badge/SPM-compatible-orange?style=flat-square)
+![Platform](https://img.shields.io/badge/macOS-v13.0-yellow?style=flat-square)
+![Platform](https://img.shields.io/badge/iOS-v16.0-yellow?style=flat-square)
+![License](https://img.shields.io/badge/license-MIT-black?style=flat-square)
+
 `KoreanKeyboardCore` is a small Swift package for building Korean custom keyboard extensions. It provides:
 
 - Hangul composition and backspace edits
