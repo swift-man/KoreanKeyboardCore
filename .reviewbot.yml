@@ -30,7 +30,6 @@ review:
   always_review:
     - ".reviewbot.yml"
     - "AGENTS.md"
-    - "AGNEST.md"
     - ".github/workflows/*.yml"
     - "GeneratingDocumentationSite"
     - "Package.swift"
