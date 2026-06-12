@@ -3,9 +3,13 @@ version: 1
 review:
   include:
     # Core package, source, tests, and docs
+    - ".github/workflows/*.yml"
+    - "GeneratingDocumentationSite"
     - "Package.swift"
+    - "Package.resolved"
     - "README.md"
     - "KeyboardCore/**/*.swift"
+    - "KeyboardCore/**/*.md"
     - "KeyboardCore/**/*.plist"
     - "KeyboardCoreTests/**/*.swift"
     - "KeyboardCoreTests/**/*.plist"
@@ -27,4 +31,6 @@ review:
     - ".reviewbot.yml"
     - "AGENTS.md"
     - "AGNEST.md"
+    - ".github/workflows/*.yml"
+    - "GeneratingDocumentationSite"
     - "Package.swift"
