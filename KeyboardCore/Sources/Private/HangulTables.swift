@@ -16,6 +16,21 @@ enum HangulTables {
   /// 완성형 한글 종성 순서입니다.
   static let finals = ["", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ", "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ", "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"]
 
+  /// 한글 자음 여부를 빠르게 확인하기 위한 집합입니다.
+  private static let consonants = Set(initials).union(finals.dropFirst())
+
+  /// 한글 모음 여부를 빠르게 확인하기 위한 집합입니다.
+  private static let vowelSet = Set(medials)
+
+  /// 초성의 완성형 인덱스를 빠르게 찾기 위한 표입니다.
+  private static let initialIndices = Dictionary(uniqueKeysWithValues: initials.enumerated().map { ($1, $0) })
+
+  /// 중성의 완성형 인덱스를 빠르게 찾기 위한 표입니다.
+  private static let medialIndices = Dictionary(uniqueKeysWithValues: medials.enumerated().map { ($1, $0) })
+
+  /// 종성의 완성형 인덱스를 빠르게 찾기 위한 표입니다.
+  private static let finalIndices = Dictionary(uniqueKeysWithValues: finals.enumerated().map { ($1, $0) })
+
   /// 두 중성을 하나의 복합 중성으로 합치는 표입니다.
   private static let medialCombinations = [
     "ㅗㅏ": "ㅘ",
@@ -76,28 +91,28 @@ enum HangulTables {
       return false
     }
 
-    return initials.contains(value) || finals.contains(value)
+    return consonants.contains(value)
   }
 
   /// 값이 한글 모음인지 확인합니다.
   /// - Parameter value: 확인할 문자열입니다.
   /// - Returns: 모음이면 `true`, 아니면 `false`입니다.
   static func isVowel(_ value: String) -> Bool {
-    medials.contains(value)
+    vowelSet.contains(value)
   }
 
   /// 값이 초성으로 사용할 수 있는 자음인지 확인합니다.
   /// - Parameter value: 확인할 문자열입니다.
   /// - Returns: 초성으로 사용할 수 있으면 `true`, 아니면 `false`입니다.
   static func isInitialConsonant(_ value: String) -> Bool {
-    initials.contains(value)
+    initialIndices[value] != nil
   }
 
   /// 값이 종성으로 사용할 수 있는 자음인지 확인합니다.
   /// - Parameter value: 확인할 문자열입니다.
   /// - Returns: 종성으로 사용할 수 있으면 `true`, 아니면 `false`입니다.
   static func isFinalConsonant(_ value: String) -> Bool {
-    finals.dropFirst().contains(value)
+    consonants.contains(value) && finalIndices[value] != nil
   }
 
   /// 두 중성을 복합 중성으로 합칩니다.
@@ -147,15 +162,15 @@ enum HangulTables {
   /// - Returns: 조합된 완성형 음절입니다. 조합할 수 없으면 입력 문자열을 이어 붙여 반환합니다.
   static func compose(initial: String, medial: String, final: String?) -> String {
     guard
-      let initialIndex = initials.firstIndex(of: initial),
-      let medialIndex = medials.firstIndex(of: medial)
+      let initialIndex = initialIndices[initial],
+      let medialIndex = medialIndices[medial]
     else {
       return initial + medial + (final ?? "")
     }
 
     let finalIndex: Int
     if let final {
-      guard let index = finals.firstIndex(of: final) else {
+      guard let index = finalIndices[final] else {
         return initial + medial + final
       }
 

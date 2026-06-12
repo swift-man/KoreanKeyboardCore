@@ -112,6 +112,14 @@ struct HangulComposerTests {
     #expect(HangulTables.compose(initial: "ㄱ", medial: "ㅏ", final: "A") == "ㄱㅏA")
   }
 
+  /// 빈 종성 슬롯과 초성 전용 자음이 종성/자음 판별에 섞이지 않는지 검증합니다.
+  @Test
+  func hangulTablesExcludeEmptyAndInitialOnlyFinals() {
+    #expect(!HangulTables.isConsonant(""))
+    #expect(!HangulTables.isFinalConsonant(""))
+    #expect(!HangulTables.isFinalConsonant("ㄸ"))
+  }
+
   /// 입력 문자열 배열을 조합기가 만든 최종 문자열로 렌더링합니다.
   /// - Parameter inputs: 순서대로 입력할 문자열 배열입니다.
   /// - Returns: 조합 결과 문자열입니다.
