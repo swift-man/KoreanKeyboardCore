@@ -5,8 +5,7 @@ import PackageDescription
 let package = Package(
   name: "KoreanKeyboardCore",
   platforms: [
-    .iOS(.v16),
-    .macOS(.v13)
+    .iOS(.v16)
   ],
   products: [
     .library(
