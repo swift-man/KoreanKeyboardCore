@@ -13,7 +13,7 @@ Add this repository in Xcode with **File > Add Package Dependencies...** and lin
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/<owner>/KoreanKeyboardCore.git", from: "1.0.0")
+    .package(url: "https://github.com/swift-man/KoreanKeyboardCore.git", from: "1.0.0")
 ]
 ```
 

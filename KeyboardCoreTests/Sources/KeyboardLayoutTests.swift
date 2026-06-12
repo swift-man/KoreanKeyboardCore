@@ -1,5 +1,5 @@
 //
-//  HangulComposerTests.swift
+//  KeyboardLayoutTests.swift
 //  KoreanKeyboardCore
 //
 //  Created by SwiftMan on 6/13/26.
