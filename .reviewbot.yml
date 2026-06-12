@@ -1,0 +1,30 @@
+version: 1
+
+review:
+  include:
+    # Core package, source, tests, and docs
+    - "Package.swift"
+    - "README.md"
+    - "KeyboardCore/**/*.swift"
+    - "KeyboardCore/**/*.plist"
+    - "KeyboardCoreTests/**/*.swift"
+    - "KeyboardCoreTests/**/*.plist"
+
+  exclude:
+    # Generated Xcode metadata
+    - "*.xcodeproj/**"
+    - "*.xcworkspace/**"
+
+    # Local user state and build outputs
+    - "Derived/**"
+    - "build/**"
+    - ".build/**"
+    - ".swiftpm/**"
+    - "**/xcuserdata/**"
+    - "*.xcuserstate"
+
+  always_review:
+    - ".reviewbot.yml"
+    - "AGENTS.md"
+    - "AGNEST.md"
+    - "Package.swift"
